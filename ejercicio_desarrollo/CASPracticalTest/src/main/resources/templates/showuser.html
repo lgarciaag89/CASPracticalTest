@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:insert="menu::head"></div>
+<body>
+<div th:insert="menu::menufrag"></div>
+<div class="text-center">
+    <div class="col-sm-12 main-section justify-content-center">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Last name</th>
+                    <th scope="col">username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Time out</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}" ?>
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.last_name}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.timeout}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div th:insert="menu::footer"></div>
+</body>
+</html>

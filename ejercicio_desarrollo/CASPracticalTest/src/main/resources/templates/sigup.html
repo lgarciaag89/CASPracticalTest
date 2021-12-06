@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SigUp</title>
+
+    <!-- BOOTSTRAP-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+
+    <!-- Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- css-->
+    <link rel="stylesheet" type="text/css" href="static/css/sigup.css" th:href="@{/css/sigup.css}">
+
+</head>
+<body>
+<div class="modal-dialog text-center">
+    <div class="col-sm-12 main-section">
+        <div class="modal-content">
+            <div style="text-align: right">
+                <a th:href="@{/login}" style="color:white;margin-top: 20px;margin-right: -10px"><i
+                        class="fas fa-home"></i></a>
+            </div>
+            <div class="col-12 user-img">
+                <img src="static/img/user.png" th:src="@{/img/user.png}"/>
+            </div>
+            <form th:action="@{/sigup}" th:object="${user}" method="post">
+                <div class="col-12 form-center">
+                    <div class="col-6 form-group user-group">
+                        <input type="text" class="form-control" th:field="*{username}" placeholder="Username"
+                               name="username"/>
+                    </div>
+                </div>
+                <div class="col-6 form-group user-group" style="float: left">
+                    <input type="text" class="form-control" th:field="*{name}" placeholder="Name" name="name"/>
+                </div>
+                <div class="col-6 form-group user-group " style="float: right">
+                    <input type="text" class="form-control" th:field="*{last_name}" placeholder="Last name"
+                           name="last_name"/>
+                </div>
+                <div class="col-6 form-group contrasena-group" style="float: left">
+                    <input type="password" class="form-control" th:field="*{password}" placeholder="Password"
+                           name="password"/>
+                </div>
+                <div class="col-6 form-group contrasena-group" style="float: right">
+                    <input type="password" class="form-control" th:field="*{passwordConfirm}"
+                           placeholder="Repeat password" name="passwordConfirm"/>
+                </div>
+                <div class="col-12 form-group email-group" style="float: right">
+                    <input type="Email" class="form-control" th:field="*{email}" placeholder="email" name="email"/>
+                </div>
+
+                <div class="row d-flex justify-content-center mt-100 select-group">
+                    <div class="col-md-12">
+                        <select id="choices-multiple-remove-button" th:field="*{roles}" placeholder="Roles"
+                                multiple>
+                            <option th:each="role:*{roles}"
+                                    th:value="${role.id}"
+                                    th:text="${role.role}"
+                            >
+                        </select>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary"></i> SigUp</button>
+                <p th:if="${message}" class="alert alert-success" role="alert">You have been successfuly sigup!!!.</p>
+                <p class="alert alert-danger" th:if="${#fields.hasErrors('username')}">Error in username field.</p>
+                <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}">Try password with at least 5 characters.</p>
+                <p class="alert alert-danger" th:if="${#fields.hasErrors('passwordConfirm')}">Those passwords didn't match.</p>
+                <p class="alert alert-danger" th:if="${#fields.hasErrors('email')}"  }>Someone already has that email.</p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--JQUERY-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+            removeItemButton: true,
+            searchResultLimit: 5,
+            renderChoiceLimit: 5
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+
+
+#FIRST TIME (CREATE DATABASE AND USER)
+#create DATABASE db_casystemstest;
+#CREATE USER 'casystems_user'@'localhost' IDENTIFIED BY 'C0ntr4s3*4';
+#GRANT ALL PRIVILEGES ON db_casystemstest . * TO 'casystems_user'@'localhost';
+#FLUSH PRIVILEGES;
+
+#SECOND TIME (Principal roles and users)
+USE db_casystemstest;
+#USERS
+INSERT INTO user (id,name,last_name,email,username,password,timeout ) values(1,"admin","root","admin@gmail.com","admin","$2a$10$uD5K.yk9I7K6uAMSJgQwduR/x4QzBaVw7dAOkfNyyMuGDocd79Nyi",60);
+INSERT INTO user (id,name,last_name,email,username,password,timeout ) values(2,"Carlos","Santana","santa@gmail.com","santa","$2a$10$uD5K.yk9I7K6uAMSJgQwduR/x4QzBaVw7dAOkfNyyMuGDocd79Nyi",120);
+INSERT INTO user (id,name,last_name,email,username,password,timeout ) values(3,"Pedro","Paramo","paramo@gmail.com","paramo","$2a$10$uD5K.yk9I7K6uAMSJgQwduR/x4QzBaVw7dAOkfNyyMuGDocd79Nyi",120);
+#Roles
+INSERT INTO role (id,role) VALUES(1,"ROLE_ADMIN");
+INSERT INTO role (id,role) VALUES(2,"ROLE_USER");
+INSERT INTO role (id,role) VALUES(3,"ROLE_GUEST");
+
+# roles 4 user
+INSERT INTO user_roles (user_id, role_id) values(1,1);
+INSERT INTO user_roles (user_id, role_id) values(1,2);
+INSERT INTO user_roles (user_id, role_id) values(2,2);
+insert into user_roles (user_id, role_id) values(3,3);
+
+# menus
+insert into menu (id,name,link) values(1,"Info User", "/showinfouser");
+insert into menu (id,name,link) values(2,"Show roles", "/showrole");
+insert into menu (id,name,link) values(3,"Show users", "/showuser");
+
+#menus 4 roles
+insert into role_menus (role_id,menu_id) values(1,1);
+insert into role_menus (role_id,menu_id) values(1,2);
+insert into role_menus (role_id,menu_id) values(1,3);
+insert into role_menus (role_id,menu_id) values(2,1);
+
+#message
+insert into message (id,message) values(1,"Buenas tardes C&amp;A");

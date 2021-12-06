@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="menu::head"></div>
+<body>
+<div th:insert="menu::menufrag"></div>
+<div class="modal-dialog text-center">
+    <div class="col-sm-12 main-section">
+        <div class="modal-content">
+            <form th:object="${user}">
+                <div class="col-12 ">
+                    <div class="col-6 form-group" style="text-align: left">
+                        <h3 style="color:white;margin-left: -5px;margin-top: 10px; margin-bottom: 10px"
+                            th:text="*{username} + '(' + *{id}+')'"></h3>
+                    </div>
+                </div>
+                <div class="col-6 form-group user-group" style="float: left">
+                    <input type="text" class="form-control" th:field="*{name}" placeholder="Name" name="name"/>
+                </div>
+                <div class="col-6 form-group user-group " style="float: right">
+                    <input type="text" class="form-control" th:field="*{last_name}" placeholder="Last name"
+                           name="last_name"/>
+                </div>
+                <div class="col-12 form-group email-group" style="float: right">
+                    <input type="text" class="form-control" th:field="*{email}" placeholder="email" name="email"/>
+                </div>
+
+                <div class="row d-flex justify-content-center mt-100 select-group" style="margin-bottom: 10px">
+                    <div class="col-md-12">
+                        <select id="choices-multiple-remove-button" th:field="*{roles}" placeholder="Roles"
+                                multiple>
+                            <option th:each="role:*{roles}"
+                                    th:value="${role.id}"
+                                    th:text="${role.role}">
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--JQUERY-->
+<div th:insert="menu::footer"></div>
+<script>
+    $(document).ready(function () {
+        var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+            removeItemButton: true,
+            searchResultLimit: 5,
+            renderChoiceLimit: 5
+        });
+    });
+</script>
+</body>
+</html>

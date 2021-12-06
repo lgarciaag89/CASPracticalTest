@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:fragment="head">
+    <!-- BOOTSTRAP-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/menu.css" th:href="@{/css/menu.css}">
+
+    <!-- Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+
+
+    <title>Hello [[${#httpServletRequest.remoteUser}]]!</title>
+</head>
+<body>
+<nav th:fragment="menufrag" class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" th:each="m:${menus}">
+                <a th:href="${m.link}" class="nav-brand nav-link" th:text="${m.name}"></a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+            <label class="form-control mr-sm-2" th:inline="text">[[${#httpServletRequest.remoteUser}]]</label>
+            <button class="btn btn-outline- my-2 my-sm-0" type="submit">LogOut</button>
+        </form>
+    </div>
+</nav>
+
+<div id="content">
+
+</div>
+
+<footer th:fragment="footer">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+</footer>
+
+</body>
+</html>

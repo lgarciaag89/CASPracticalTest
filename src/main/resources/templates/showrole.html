@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:insert="menu::head"></div>
+<body>
+<div th:insert="menu::menufrag"></div>
+<div class="modal-dialog text-center">
+    <div class="col-sm-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Role</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="role : ${roles}" ?>
+                        <td th:text="${role.id}"></td>
+                        <td th:text="${role.role}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>
+<div th:insert="menu::footer"></div>
+</body>
+</html>
