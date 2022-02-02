@@ -16,25 +16,28 @@ import java.util.List;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+
     @Autowired
     private UserRepository userRepository;
     @Override
     public UserDetail loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
-        List grants = new ArrayList();
+        User user = userRepository.findByUsername(username).
+                orElseThrow(() -> new UsernameNotFoundException(String.format("%s username not found!",username)));
+        List<GrantedAuthority>grants = new ArrayList<>();
         for (Role role : user.getRoles()) {
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRole());
             grants.add(grantedAuthority);
         }
-        UserDetail userDetails = new UserDetail(user.getUsername(),user.getPassword(),grants,user.getTimeout());
-        return userDetails;
+        return new UserDetail(user.getUsername(),user.getPassword(),grants,user.getTimeout());
     }
 
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        return userRepository.findByUsername(username).
+                orElseThrow(() -> new UsernameNotFoundException(String.format("%s username not found!",username)));
     }
 
     public User findByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        return userRepository.findByEmail(email).
+                orElseThrow(() -> new UsernameNotFoundException(String.format("%s use email not found!",email)));
     }
 }
