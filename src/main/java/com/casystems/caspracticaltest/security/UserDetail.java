@@ -4,7 +4,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper=true)
 public class UserDetail extends User {
     private Integer timeout;
     public UserDetail(String username, String password, Collection<? extends GrantedAuthority> authorities, Integer time) {
@@ -18,21 +20,5 @@ public class UserDetail extends User {
 
     public void setTimeout(int timeout) {
         this.timeout = timeout;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if(obj == null)
-            return false;
-        if(obj == this)
-            return true;
-        if(!(obj instanceof UserDetail))
-            return true;
-        UserDetail userDetail = (UserDetail) obj;
-        if(!super.equals(userDetail))
-            return false;
-        if(timeout!=userDetail.getTimeout())
-            return false;
-        return true;
     }
 }
